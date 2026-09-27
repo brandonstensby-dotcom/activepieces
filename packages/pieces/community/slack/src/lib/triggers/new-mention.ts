@@ -3,7 +3,7 @@ import {
   TriggerStrategy,
   createTrigger,
 } from '@activepieces/pieces-framework';
-import { appWebhookSetupInfo, getChannels, multiSelectChannelInfo, userIds, usergroupIds } from '../common/props';
+import { appWebhookSetupInfo, getChannelsDropdownState, multiSelectChannelInfo, userIds, usergroupIds } from '../common/props';
 import { slackAuth } from '../auth';
 import { getBotToken, getTeamId, SlackAuthValue } from '../common/auth-helpers';
 import { newMentionTriggerOutputSchema } from '../output-schemas';
@@ -38,12 +38,7 @@ export const newMention = createTrigger({
           };
         }
         const accessToken = getBotToken(auth as SlackAuthValue);
-        const channels = await getChannels(accessToken);
-        return {
-          disabled: false,
-          placeholder: 'Select channel',
-          options: channels,
-        };
+        return await getChannelsDropdownState(accessToken, { placeholder: 'Select channel' });
       },
     }),
     ignoreBots: Property.Checkbox({

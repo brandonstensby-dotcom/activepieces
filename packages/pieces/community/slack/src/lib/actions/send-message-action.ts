@@ -1,5 +1,5 @@
 import { createAction, Property } from '@activepieces/pieces-framework';
-import { profilePicture, slackChannel, username, blocks, threadTs, singleSelectChannelInfo, mentionOriginFlow, iconEmoji, replyBroadcast, unfurlLinks } from '../common/props';
+import { profilePicture, slackChannel, botOnlyChannels, username, blocks, threadTs, singleSelectChannelInfo, mentionOriginFlow, iconEmoji, replyBroadcast, unfurlLinks } from '../common/props';
 import { buildFlowOriginContextBlock, processMessageTimestamp, slackSendMessage, textToSectionBlocks } from '../common/utils';
 import { slackAuth } from '../auth';
 import { Block,KnownBlock } from '@slack/web-api';
@@ -18,6 +18,7 @@ export const slackSendMessageAction = createAction({
   outputSchema: chatPostMessageOutputSchema,
   props: {
     info: singleSelectChannelInfo,
+    botOnly: botOnlyChannels,
     channel: slackChannel(true),
     text: Property.LongText({
       displayName: 'Message',

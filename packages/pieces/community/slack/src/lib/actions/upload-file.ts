@@ -3,6 +3,7 @@ import { slackAuth } from '../auth';
 import { WebClient } from '@slack/web-api';
 import {
   slackChannel,
+  botOnlyChannels,
 } from '../common/props';
 import { getBotToken, SlackAuthValue } from '../common/auth-helpers';
 import { uploadFileActionOutputSchema } from '../output-schemas';
@@ -33,6 +34,7 @@ export const uploadFile = createAction({
       placeholder: 'report.pdf',
       required: false,
     }),
+    botOnly: botOnlyChannels,
     channel: slackChannel(false),
   },
   async run(context) {
